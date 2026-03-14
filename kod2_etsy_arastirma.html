@@ -672,6 +672,7 @@ function productCardHTML(p, rank){
   const tagsHtml=p.tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${p.tags.slice(0,8).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:'';
   const escapedTitle = encodeURIComponent(p.title);
   const etsySearchUrl = `https://www.etsy.com/search?q=${escapedTitle}`;
+  const productJson = encodeURIComponent(JSON.stringify({...p, url: p.title}));
 
   return `<div class="product-card score-${sc}">
     <div class="prod-rank ${rank<=3?'top3':''}">${rank}</div>
