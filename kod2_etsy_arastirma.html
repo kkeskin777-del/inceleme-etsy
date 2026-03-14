@@ -150,6 +150,15 @@ h1 em{font-style:italic;color:var(--wood-light);}
 .tags-list{display:flex;flex-wrap:wrap;gap:5px;}
 .tag{background:rgba(193,127,59,.08);border:1px solid rgba(193,127,59,.15);border-radius:100px;padding:3px 10px;font-size:11px;color:var(--wood-light);}
 
+/* ETSY SEARCH BTN */
+.etsy-search-btn{
+  display:inline-flex;align-items:center;gap:8px;margin-top:12px;
+  background:rgba(241,100,30,0.08);border:1px solid rgba(241,100,30,0.2);
+  border-radius:12px;padding:9px 16px;font-size:13px;font-weight:600;
+  color:#F1641E;text-decoration:none;transition:background .2s,transform .2s;
+}
+.etsy-search-btn:hover{background:rgba(241,100,30,0.15);transform:translateX(2px);}
+
 /* FAV NOTE on card */
 .fav-note{font-size:11px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:4px;}
 
@@ -661,20 +670,20 @@ function productCardHTML(p, rank){
   const monthly=p.monthlySales>0?p.monthlySales.toFixed(1):'—';
   const revenue=p.monthlyRevenue>0?'$'+p.monthlyRevenue.toFixed(0):'—';
   const tagsHtml=p.tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${p.tags.slice(0,8).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:'';
-  const escapedUrl = p.url ? p.url.replace(/"/g,'&quot;') : '#';
-  const productJson = encodeURIComponent(JSON.stringify(p));
+  const escapedTitle = encodeURIComponent(p.title);
+  const etsySearchUrl = `https://www.etsy.com/search?q=${escapedTitle}`;
 
   return `<div class="product-card score-${sc}">
     <div class="prod-rank ${rank<=3?'top3':''}">${rank}</div>
     <div class="prod-body">
       <div class="prod-head">
-        <a class="prod-title" href="${escapedUrl}" target="_blank" rel="noreferrer">${p.title}</a>
+        <div class="prod-title">${p.title}</div>
         <div class="prod-actions">
           <span class="score-badge ${sc}">${sl}</span>
-          <button class="fav-btn ${isFaved?'active':''}" data-url="${escapedUrl}"
+          <button class="fav-btn ${isFaved?'active':''}" data-url="${escapedTitle}"
             style="${isFaved?'':'filter:grayscale(1) opacity(.35);'}"
             title="${isFaved?'Favoriden çıkar':'Favoriye ekle'}"
-            onclick="toggleFav('${escapedUrl}', JSON.parse(decodeURIComponent('${productJson}')))">❤️</button>
+            onclick="toggleFav('${escapedTitle}', JSON.parse(decodeURIComponent('${productJson}')))">❤️</button>
         </div>
       </div>
       <div class="prod-shop">🏪 ${p.shop||'Bilinmeyen'} &nbsp;·&nbsp; ${p.listingAge} aylık ilan &nbsp;·&nbsp; ${p.salesSource||'tahmin'}</div>
@@ -687,6 +696,9 @@ function productCardHTML(p, rank){
         <div class="pstat"><div class="pstat-label">Fırsat</div><div class="pstat-val" style="color:${score>=65?'#4CAF7D':score>=40?'#F0C040':'#E05555'};">${score}</div><div class="pstat-sub">/ 100</div></div>
       </div>
       ${tagsHtml}
+      <a href="${etsySearchUrl}" target="_blank" rel="noreferrer" class="etsy-search-btn">
+        🔍 Etsy'de Bu Ürünü Ara →
+      </a>
     </div>
   </div>`;
 }
@@ -694,19 +706,20 @@ function productCardHTML(p, rank){
 function favCardHTML(p, rank){
   const score=p.opportunityScore||0;
   const sc=score>=65?'high':score>=40?'mid':'low';
-  const escapedUrl = (p.url||'#').replace(/"/g,'&quot;');
   const monthly = p.monthlySales ? parseFloat(p.monthlySales).toFixed(1) : '—';
   const revenue = p.monthlyRevenue ? '$'+parseFloat(p.monthlyRevenue).toFixed(0) : '—';
   const tags = Array.isArray(p.tags) ? p.tags : (p.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
+  const etsySearchUrl = `https://www.etsy.com/search?q=${encodeURIComponent(p.title||'')}`;
+  const escapedTitle = (p.title||'').replace(/'/g,"\\'");
 
   return `<div class="product-card score-${sc}">
     <div class="prod-rank ${rank<=3?'top3':''}">${rank}</div>
     <div class="prod-body">
       <div class="prod-head">
-        <a class="prod-title" href="${escapedUrl}" target="_blank" rel="noreferrer">${p.title}</a>
+        <div class="prod-title">${p.title}</div>
         <div class="prod-actions">
           <span class="score-badge ${sc}">${score}/100</span>
-          <button class="fav-btn active" title="Favoriden çıkar" onclick="removeFav('${escapedUrl}')">❤️</button>
+          <button class="fav-btn active" title="Favoriden çıkar" onclick="removeFav('${escapedTitle}')">❤️</button>
         </div>
       </div>
       <div class="prod-shop">🏪 ${p.shop||'Bilinmeyen'} &nbsp;·&nbsp; 🔍 ${p.keyword||'—'} &nbsp;·&nbsp; 📅 ${p.addedAt||''}</div>
@@ -719,6 +732,9 @@ function favCardHTML(p, rank){
         <div class="pstat"><div class="pstat-label">Fırsat</div><div class="pstat-val" style="color:${score>=65?'#4CAF7D':score>=40?'#F0C040':'#E05555'};">${score}</div><div class="pstat-sub">/ 100</div></div>
       </div>
       ${tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${tags.slice(0,8).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:''}
+      <a href="${etsySearchUrl}" target="_blank" rel="noreferrer" class="etsy-search-btn">
+        🔍 Etsy'de Bu Ürünü Ara →
+      </a>
     </div>
   </div>`;
 }
