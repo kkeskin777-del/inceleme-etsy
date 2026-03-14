@@ -324,7 +324,7 @@ function saveSettings(){
 window.addEventListener('DOMContentLoaded', async () => {
   const k = localStorage.getItem('etsy_api_key');
   if(k) document.getElementById('apiKeyInput').value = k;
-  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyH3pX6RGJiup7ujsW05uXNY3fdlSZ2QgFDs_NieSFNWXJBZYpZa60OwyZU2j-3pOE12w/exec';
+  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN3lQE_CeuE7aq-oQS3XxVEK_5q4H3uHyG6HobRLPgK6xfcA5J4QXIBlXsRRycixhVwA/exec';
   const s = localStorage.getItem('etsy_script_url') || DEFAULT_SCRIPT_URL;
   document.getElementById('scriptUrlInput').value = s;
   SCRIPT_URL = s;
