@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Etsy Araçları | Marangoz Atölyesi</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,600;0,900;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --wood: #C17F3B;
+  --wood-light: #E8A85F;
+  --wood-dim: rgba(193,127,59,0.1);
+  --green: #4CAF7D;
+  --bg: #0A0A0F;
+  --surface: #12121A;
+  --card: #161620;
+  --border: rgba(255,255,255,0.06);
+  --border2: rgba(193,127,59,0.2);
+  --text: #F0EDE8;
+  --muted: #6A6878;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  min-height:100vh;background:var(--bg);color:var(--text);
+  font-family:'Outfit',sans-serif;overflow-x:hidden;
+}
+
+/* ── BG EFFECTS ── */
+.bg-glow{position:fixed;pointer-events:none;z-index:0;}
+.bg-glow-1{top:-300px;left:-200px;width:800px;height:800px;background:radial-gradient(circle,rgba(193,127,59,0.06) 0%,transparent 65%);}
+.bg-glow-2{bottom:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(76,175,125,0.04) 0%,transparent 65%);}
+.grain{position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+
+/* ── NAV ── */
+nav{
+  padding:22px 0;display:flex;align-items:center;justify-content:space-between;
+  border-bottom:1px solid var(--border);margin-bottom:0;
+}
+.nav-logo{display:flex;align-items:center;gap:10px;}
+.nav-logo-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:linear-gradient(135deg,var(--wood),#9A5F1E);
+  display:flex;align-items:center;justify-content:center;font-size:18px;
+}
+.nav-logo-text{font-family:'Fraunces',serif;font-size:18px;font-weight:600;color:var(--text);}
+.nav-badge{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);font-weight:500;}
+
+/* ── HERO ── */
+.hero{
+  padding:100px 0 80px;text-align:center;
+  animation:fadeUp .8s ease both;
+}
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;
+  color:var(--wood);border:1px solid var(--border2);background:var(--wood-dim);
+  border-radius:100px;padding:6px 16px;margin-bottom:32px;
+}
+.hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--wood);animation:pulse 2s infinite;}
+.hero-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(42px,8vw,80px);font-weight:900;line-height:.95;
+  margin-bottom:24px;letter-spacing:-1px;
+}
+.hero-title .line1{display:block;color:var(--text);}
+.hero-title .line2{display:block;font-style:italic;color:var(--wood-light);}
+.hero-title .line3{display:block;color:var(--text);font-size:.6em;font-weight:300;font-style:normal;margin-top:8px;}
+.hero-sub{
+  color:var(--muted);font-size:17px;font-weight:300;line-height:1.65;
+  max-width:520px;margin:0 auto 48px;
+}
+.hero-cta{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--wood),#9A5F1E);
+  color:#fff;font-weight:700;font-size:16px;font-family:'Outfit',sans-serif;
+  border:none;border-radius:16px;padding:16px 36px;cursor:pointer;
+  text-decoration:none;transition:transform .2s,box-shadow .2s;
+  box-shadow:0 4px 24px rgba(193,127,59,0.3);
+}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(193,127,59,0.4);}
+.hero-cta .arrow{font-size:18px;transition:transform .2s;}
+.hero-cta:hover .arrow{transform:translateX(4px);}
+
+/* ── STATS ROW ── */
+.stats-row{
+  display:flex;justify-content:center;gap:48px;flex-wrap:wrap;
+  padding:40px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+  margin-bottom:80px;animation:fadeUp .8s .1s ease both;
+}
+.stat-item{text-align:center;}
+.stat-num{font-family:'Fraunces',serif;font-size:32px;font-weight:900;color:var(--wood-light);display:block;}
+.stat-lbl{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;font-weight:500;margin-top:4px;}
+
+/* ── TOOLS GRID ── */
+.section-label{
+  font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);font-weight:600;margin-bottom:20px;
+}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:80px;}
+
+.tool-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:24px;padding:28px;text-decoration:none;color:var(--text);
+  display:flex;flex-direction:column;gap:16px;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  position:relative;overflow:hidden;
+  animation:fadeUp .6s ease both;
+}
+.tool-card:hover{border-color:var(--border2);transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.4);}
+.tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--wood),transparent);opacity:0;transition:opacity .2s;}
+.tool-card:hover::before{opacity:.6;}
+.tool-card:nth-child(2){animation-delay:.08s;}
+.tool-card:nth-child(3){animation-delay:.16s;}
+
+.tool-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+  border:1px solid var(--border);flex-shrink:0;
+}
+.tool-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.tool-name{font-family:'Fraunces',serif;font-size:20px;font-weight:700;line-height:1.2;margin-bottom:4px;}
+.tool-tagline{font-size:13px;color:var(--muted);font-weight:300;}
+.tool-status{
+  font-size:10px;letter-spacing:1px;text-transform:uppercase;font-weight:700;
+  border-radius:100px;padding:3px 10px;white-space:nowrap;
+}
+.tool-status.live{background:rgba(76,175,125,.12);color:var(--green);border:1px solid rgba(76,175,125,.2);}
+.tool-status.soon{background:rgba(107,104,120,.1);color:var(--muted);border:1px solid var(--border);}
+
+.tool-features{display:flex;flex-direction:column;gap:7px;}
+.tool-feature{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);}
+.tool-feature::before{content:'✓';color:var(--green);font-weight:700;font-size:12px;flex-shrink:0;}
+
+.tool-footer{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.tool-link{
+  font-size:13px;font-weight:600;color:var(--wood-light);
+  display:flex;align-items:center;gap:6px;
+}
+.tool-cost{font-size:11px;color:var(--muted);}
+
+/* ── HOW IT WORKS ── */
+.how-section{margin-bottom:80px;animation:fadeUp .8s .2s ease both;}
+.how-title{font-family:'Fraunces',serif;font-size:32px;font-weight:700;margin-bottom:32px;color:var(--text);}
+.how-title em{font-style:italic;color:var(--wood-light);}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+.step{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:24px;position:relative;}
+.step-num{
+  font-family:'Fraunces',serif;font-size:42px;font-weight:900;
+  color:var(--border2);line-height:1;margin-bottom:12px;
+}
+.step-title{font-weight:600;font-size:15px;margin-bottom:6px;}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.6;}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);padding:32px 0;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.footer-text{font-size:13px;color:var(--muted);}
+.footer-text strong{color:var(--wood-light);}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+.footer-link:hover{color:var(--wood-light);}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:none;}}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.4;}}
+
+@media(max-width:600px){
+  .hero{padding:60px 0 50px;}
+  .stats-row{gap:28px;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-glow bg-glow-1"></div>
+<div class="bg-glow bg-glow-2"></div>
+<div class="grain"></div>
+
+<div class="wrap">
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">
+      <div class="nav-logo-icon">🪵</div>
+      <div class="nav-logo-text">Atölye Araçları</div>
+    </div>
+    <div class="nav-badge">Marangoz · Etsy</div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">🔨 Ahşap Ürün Satıcıları İçin</div>
+    <h1 class="hero-title">
+      <span class="line1">Etsy'de</span>
+      <span class="line2">Ne Satıyor?</span>
+      <span class="line3">Araştır, Favorile, Karar Ver.</span>
+    </h1>
+    <p class="hero-sub">
+      Hangi ahşap ürünün çok sattığını, fiyat aralığını, 
+      aylık gelir potansiyelini ve doğru tag'leri — hepsini tek yerde bul.
+    </p>
+    <a href="kod2_etsy_arastirma.html" class="hero-cta">
+      Araştırmaya Başla <span class="arrow">→</span>
+    </a>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-item">
+      <span class="stat-num">20</span>
+      <div class="stat-lbl">Ürün / Arama</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">AI</span>
+      <div class="stat-lbl">Destekli Analiz</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">~$0.1</span>
+      <div class="stat-lbl">Arama Başına</div>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">☁️</span>
+      <div class="stat-lbl">Google Sheets Sync</div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section-label">🛠️ Araçlar</div>
+  <div class="tools-grid">
+
+    <a href="kod2_etsy_arastirma.html" class="tool-card">
+      <div class="tool-head">
+        <div>
+          <div class="tool-icon" style="background:rgba(193,127,59,0.1);">🔍</div>
+        </div>
+        <span class="tool-status live">Aktif</span>
+      </div>
+      <div>
+        <div class="tool-name">Pazar Araştırması</div>
+        <div class="tool-tagline">Anahtar kelimeyle en çok satan ürünleri bul</div>
+      </div>
+      <div class="tool-features">
+        <div class="tool-feature">Tahmini satış & aylık gelir</div>
+        <div class="tool-feature">Tag / anahtar kelime analizi</div>
+        <div class="tool-feature">Fırsat skoru (0–100)</div>
+        <div class="tool-feature">Google Sheets favoriler</div>
+      </div>
+      <div class="tool-footer">
+        <span class="tool-link">Aç →</span>
+        <span class="tool-cost">~$0.05–0.10 / arama</span>
+      </div>
+    </a>
+
+    <div class="tool-card" style="opacity:.5;cursor:default;">
+      <div class="tool-head">
+        <div>
+          <div class="tool-icon" style="background:rgba(107,104,120,0.1);">📦</div>
+        </div>
+        <span class="tool-status soon">Yakında</span>
+      </div>
+      <div>
+        <div class="tool-name">Ürün Takibi</div>
+        <div class="tool-tagline">Favorilediğin ürünlerin satışlarını izle</div>
+      </div>
+      <div class="tool-features">
+        <div class="tool-feature">Haftalık satış değişimi</div>
+        <div class="tool-feature">Fiyat geçmişi</div>
+        <div class="tool-feature">Rakip uyarıları</div>
+      </div>
+      <div class="tool-footer">
+        <span class="tool-link" style="color:var(--muted);">Yakında</span>
+      </div>
+    </div>
+
+    <div class="tool-card" style="opacity:.5;cursor:default;">
+      <div class="tool-head">
+        <div>
+          <div class="tool-icon" style="background:rgba(107,104,120,0.1);">🏷️</div>
+        </div>
+        <span class="tool-status soon">Yakında</span>
+      </div>
+      <div>
+        <div class="tool-name">Tag Üretici</div>
+        <div class="tool-tagline">Ürününe özel Etsy tag seti oluştur</div>
+      </div>
+      <div class="tool-features">
+        <div class="tool-feature">SEO odaklı tag önerileri</div>
+        <div class="tool-feature">Rakip tag analizi</div>
+        <div class="tool-feature">Kopyala & yapıştır</div>
+      </div>
+      <div class="tool-footer">
+        <span class="tool-link" style="color:var(--muted);">Yakında</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="how-section">
+    <h2 class="how-title">Nasıl <em>çalışır?</em></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Kelime Gir</div>
+        <div class="step-desc">Üretmek istediğin ürünü İngilizce yaz — "wooden tray", "wood shelf" gibi.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">AI Araştırır</div>
+        <div class="step-desc">Claude, Etsy'yi tarar ve en çok satan 20 ürünü satış & gelir verileriyle getirir.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Analiz Et</div>
+        <div class="step-desc">Fırsat skoru, fiyat aralığı, tag'ler ve aylık gelir tahminini karşılaştır.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Favorile</div>
+        <div class="step-desc">İlgini çeken ürünleri ❤️ ile işaretle — Google Sheets'e otomatik kaydedilir.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-text">Yapılmış <strong>Claude AI</strong> ile · Kişisel Kullanım</div>
+    <div class="footer-links">
+      <a href="kod2_etsy_arastirma.html" class="footer-link">Araştırma Aracı</a>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>
