@@ -23,64 +23,23 @@
   --muted: #6A6878;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{
-  min-height:100vh;background:var(--bg);color:var(--text);
-  font-family:'Outfit',sans-serif;overflow-x:hidden;
-}
-body::before{
-  content:'';position:fixed;inset:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:0;opacity:0.6;
-}
-body::after{
-  content:'';position:fixed;inset:0;
-  background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(193,127,59,0.015) 120px,rgba(193,127,59,0.015) 121px);
-  pointer-events:none;z-index:0;
-}
+body{min-height:100vh;background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:0.6;}
+body::after{content:'';position:fixed;inset:0;background:repeating-linear-gradient(92deg,transparent,transparent 120px,rgba(193,127,59,0.015) 120px,rgba(193,127,59,0.015) 121px);pointer-events:none;z-index:0;}
 .page{max-width:960px;margin:0 auto;padding:48px 20px 100px;position:relative;z-index:1;}
 
-/* HEADER */
 .header{margin-bottom:40px;animation:fadeDown .7s ease both;}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;color:var(--wood);border:1px solid var(--border2);background:var(--wood-dim);border-radius:100px;padding:5px 14px;margin-bottom:22px;}
 h1{font-family:'Fraunces',serif;font-size:clamp(36px,6vw,60px);font-weight:900;line-height:1;margin-bottom:10px;color:var(--text);}
 h1 em{font-style:italic;color:var(--wood-light);}
 .tagline{color:var(--muted);font-size:15px;font-weight:300;}
 
-/* TABS */
 .tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:5px;width:fit-content;}
 .tab-btn{border:none;border-radius:12px;padding:9px 22px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;color:var(--muted);background:none;display:flex;align-items:center;gap:7px;}
 .tab-btn.active{background:var(--card);color:var(--text);box-shadow:0 2px 8px rgba(0,0,0,.3);}
 .tab-badge{background:var(--wood-dim);border:1px solid var(--border2);border-radius:100px;padding:1px 7px;font-size:11px;color:var(--wood-light);font-weight:700;}
 
-/* SETUP PANEL */
-.setup-panel{background:var(--surface);border:1px solid rgba(240,192,64,0.15);border-radius:20px;padding:20px 24px;margin-bottom:14px;animation:fadeDown .7s .05s ease both;}
-.setup-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
-.setup-group label{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.setup-group label.api-lbl{color:var(--yellow);}
-.setup-group label.gs-lbl{color:var(--green);}
-.setup-input{
-  width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.08);
-  border-radius:12px;padding:10px 14px;color:var(--text);font-size:13px;
-  font-family:monospace;letter-spacing:.3px;outline:none;transition:border .2s;
-}
-.setup-input.api{border-color:rgba(240,192,64,0.1);}
-.setup-input.api:focus{border-color:rgba(240,192,64,0.35);}
-.setup-input.gs{border-color:rgba(76,175,125,0.1);}
-.setup-input.gs:focus{border-color:rgba(76,175,125,0.3);}
-.setup-input::placeholder{font-family:'Outfit',sans-serif;letter-spacing:0;color:var(--muted);}
-.save-all-btn{
-  margin-top:12px;background:linear-gradient(135deg,rgba(193,127,59,.2),rgba(76,175,125,.15));
-  border:1px solid rgba(193,127,59,.25);border-radius:12px;padding:10px 20px;
-  color:var(--text);font-weight:600;font-size:13px;font-family:'Outfit',sans-serif;
-  cursor:pointer;transition:opacity .2s;
-}
-.save-all-btn:hover{opacity:.8;}
-.setup-hint{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.6;}
-.setup-hint a{color:var(--wood-light);text-decoration:none;}
-.saved-msg{font-size:12px;color:var(--green);margin-top:8px;display:none;}
-
-/* SEARCH PANEL */
-.search-panel{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:26px;margin-bottom:20px;animation:fadeDown .7s .1s ease both;position:relative;overflow:hidden;}
+.search-panel{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:26px;margin-bottom:20px;animation:fadeDown .7s .05s ease both;position:relative;overflow:hidden;}
 .search-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--wood),var(--wood-light),transparent);opacity:.6;}
 .search-label{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600;color:var(--wood);margin-bottom:12px;}
 .search-row{display:flex;gap:10px;flex-wrap:wrap;}
@@ -96,13 +55,11 @@ h1 em{font-style:italic;color:var(--wood-light);}
 .sug-btn:hover{background:rgba(193,127,59,.22);}
 .error-msg{margin-top:12px;color:#F87171;font-size:13px;display:none;align-items:center;gap:6px;}
 
-/* PROGRESS */
 .progress-wrap{display:none;margin-bottom:20px;}
 .progress-label{font-size:13px;color:var(--muted);margin-bottom:8px;display:flex;justify-content:space-between;}
 .progress-bar-bg{background:var(--card2);border-radius:100px;height:4px;overflow:hidden;}
 .progress-bar-fill{height:4px;background:linear-gradient(90deg,var(--wood),var(--wood-light));border-radius:100px;transition:width .4s ease;width:0%;}
 
-/* RESULTS HEADER */
 .results-header{display:none;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
 .results-title{font-family:'Fraunces',serif;font-size:22px;font-weight:700;color:var(--text);}
 .results-title span{color:var(--wood-light);}
@@ -110,7 +67,6 @@ h1 em{font-style:italic;color:var(--wood-light);}
 .sort-btn{background:var(--card2);border:1px solid var(--border);border-radius:10px;padding:6px 14px;font-size:12px;color:var(--muted);cursor:pointer;transition:all .2s;font-family:'Outfit',sans-serif;}
 .sort-btn.active,.sort-btn:hover{border-color:var(--border2);color:var(--wood-light);}
 
-/* SUMMARY STRIP */
 #summaryStrip{display:none;gap:10px;flex-wrap:wrap;margin-bottom:20px;}
 .strip-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:14px 18px;flex:1;min-width:120px;position:relative;overflow:hidden;}
 .strip-card .sc-glow{position:absolute;top:-20px;right:-20px;width:60px;height:60px;border-radius:50%;opacity:.15;}
@@ -118,15 +74,18 @@ h1 em{font-style:italic;color:var(--wood-light);}
 .strip-card .sc-val{font-family:'Fraunces',serif;font-size:22px;font-weight:700;}
 .strip-card .sc-sub{font-size:11px;color:var(--muted);margin-top:3px;}
 
-/* PRODUCT CARDS */
-.product-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px;margin-bottom:14px;display:grid;grid-template-columns:auto 1fr;gap:18px;animation:fadeUp .4s ease both;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;}
+.product-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px;margin-bottom:14px;display:grid;grid-template-columns:auto auto 1fr;gap:18px;animation:fadeUp .4s ease both;transition:border-color .2s,transform .2s;position:relative;overflow:hidden;}
 .product-card:hover{border-color:var(--border2);transform:translateY(-1px);}
 .product-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
 .product-card.score-high::before{background:var(--green);}
 .product-card.score-mid::before{background:var(--yellow);}
 .product-card.score-low::before{background:var(--red);}
+
 .prod-rank{width:36px;height:36px;border-radius:10px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;font-weight:700;color:var(--muted);flex-shrink:0;align-self:start;margin-top:2px;}
 .prod-rank.top3{background:var(--wood-dim);border-color:var(--border2);color:var(--wood-light);}
+.prod-img{width:80px;height:80px;border-radius:12px;object-fit:cover;border:1px solid var(--border2);flex-shrink:0;align-self:start;}
+.prod-img-placeholder{width:80px;height:80px;border-radius:12px;background:var(--card2);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0;align-self:start;}
+
 .prod-body{min-width:0;}
 .prod-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;}
 .prod-title{font-weight:600;font-size:15px;line-height:1.35;color:var(--text);text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;transition:color .2s;flex:1;}
@@ -136,52 +95,40 @@ h1 em{font-style:italic;color:var(--wood-light);}
 .score-badge.high{background:rgba(76,175,125,.15);color:var(--green);border:1px solid rgba(76,175,125,.25);}
 .score-badge.mid{background:rgba(240,192,64,.12);color:var(--yellow);border:1px solid rgba(240,192,64,.2);}
 .score-badge.low{background:rgba(224,85,85,.12);color:var(--red);border:1px solid rgba(224,85,85,.2);}
-.fav-btn{background:none;border:none;cursor:pointer;font-size:20px;line-height:1;padding:3px 5px;border-radius:8px;transition:transform .2s,background .2s;filter:grayscale(1) opacity(.35);}
-.fav-btn:hover{transform:scale(1.25);background:rgba(255,100,100,.08);filter:none;}
+.fav-btn{background:none;border:none;cursor:pointer;font-size:20px;line-height:1;padding:3px 5px;border-radius:8px;transition:transform .2s;filter:grayscale(1) opacity(.35);}
+.fav-btn:hover{transform:scale(1.25);filter:none;}
 .fav-btn.active{filter:none;animation:heartPop .3s ease;}
+
 .prod-shop{color:var(--muted);font-size:12px;margin-bottom:12px;}
 .prod-stats{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px;}
-.pstat{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:8px 12px;flex:1;min-width:90px;}
+.pstat{background:var(--card2);border:1px solid var(--border);border-radius:12px;padding:8px 12px;flex:1;min-width:85px;}
 .pstat-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:4px;}
 .pstat-val{font-family:'Fraunces',serif;font-size:18px;font-weight:700;}
 .pstat-sub{font-size:10px;color:var(--muted);margin-top:1px;}
-.tags-section{margin-top:2px;}
+
+.tags-section{margin-bottom:12px;}
 .tags-label{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:7px;}
 .tags-list{display:flex;flex-wrap:wrap;gap:5px;}
 .tag{background:rgba(193,127,59,.08);border:1px solid rgba(193,127,59,.15);border-radius:100px;padding:3px 10px;font-size:11px;color:var(--wood-light);}
 
-/* ETSY SEARCH BTN */
-.etsy-search-btn{
-  display:inline-flex;align-items:center;gap:8px;margin-top:12px;
-  background:rgba(241,100,30,0.08);border:1px solid rgba(241,100,30,0.2);
-  border-radius:12px;padding:9px 16px;font-size:13px;font-weight:600;
-  color:#F1641E;text-decoration:none;transition:background .2s,transform .2s;
-}
-.etsy-search-btn:hover{background:rgba(241,100,30,0.15);transform:translateX(2px);}
+.etsy-link-btn{display:inline-flex;align-items:center;gap:8px;background:rgba(241,100,30,0.08);border:1px solid rgba(241,100,30,0.2);border-radius:12px;padding:9px 16px;font-size:13px;font-weight:600;color:#F1641E;text-decoration:none;transition:background .2s,transform .2s;}
+.etsy-link-btn:hover{background:rgba(241,100,30,0.15);transform:translateX(2px);}
 
-/* FAV NOTE on card */
-.fav-note{font-size:11px;color:var(--muted);margin-top:6px;display:flex;align-items:center;gap:4px;}
-
-/* TOAST */
 #toast{position:fixed;bottom:28px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--card);border:1px solid var(--border2);border-radius:14px;padding:11px 20px;font-size:13px;font-weight:600;color:var(--text);box-shadow:0 8px 32px rgba(0,0,0,.5);z-index:999;opacity:0;transition:all .3s;pointer-events:none;white-space:nowrap;}
 #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-/* EMPTY */
 #emptyState{text-align:center;padding:80px 20px;color:var(--muted);}
 #emptyState .ei{font-size:56px;margin-bottom:16px;display:block;opacity:.4;}
 #emptyState p{font-size:16px;font-family:'Fraunces',serif;font-weight:300;}
 #emptyState span{font-size:13px;display:block;margin-top:6px;opacity:.7;}
 
-/* FAV TAB */
 #favsTab{display:none;}
 .fav-header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:10px;}
 .danger-btn{background:rgba(224,85,85,.08);border:1px solid rgba(224,85,85,.2);border-radius:10px;padding:7px 16px;font-size:12px;color:#F87171;cursor:pointer;font-family:'Outfit',sans-serif;transition:background .2s;}
 .danger-btn:hover{background:rgba(224,85,85,.18);}
 #favEmpty{text-align:center;padding:80px 20px;color:var(--muted);display:none;}
 #favEmpty .fei{font-size:48px;margin-bottom:14px;display:block;opacity:.4;}
-.loading-favs{text-align:center;padding:40px;color:var(--muted);font-size:14px;}
 
-/* SKELETON */
 .skeleton-card{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:20px;display:flex;gap:16px;margin-bottom:14px;}
 .skel{background:linear-gradient(90deg,var(--card2) 25%,rgba(255,255,255,.03) 50%,var(--card2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;}
 
@@ -197,8 +144,7 @@ h1 em{font-style:italic;color:var(--wood-light);}
 
 @media(max-width:640px){
   .product-card{grid-template-columns:1fr;}
-  .prod-rank{display:none;}
-  .setup-row{grid-template-columns:1fr;}
+  .prod-rank,.prod-img,.prod-img-placeholder{display:none;}
 }
 </style>
 </head>
@@ -206,47 +152,22 @@ h1 em{font-style:italic;color:var(--wood-light);}
 <div id="toast"></div>
 <div class="page">
 
-  <!-- HEADER -->
   <div class="header">
     <div class="eyebrow">🪵 Marangoz Araştırma Aracı</div>
     <h1>Etsy'de <em>Ne Satıyor?</em></h1>
-    <p class="tagline">Anahtar kelime gir — en çok satan ahşap ürünleri bul, favorile, karar ver.</p>
+    <p class="tagline">Gerçek Etsy verileri · Doğru linkler · Ürün fotoğrafları · Ücretsiz</p>
   </div>
 
-  <!-- TABS -->
   <div class="tabs">
     <button class="tab-btn active" id="tab-search" onclick="switchTab('search')">🔍 Arama</button>
     <button class="tab-btn" id="tab-favs" onclick="switchTab('favs')">❤️ Favoriler <span class="tab-badge" id="favCount">…</span></button>
   </div>
 
-  <!-- ══ SEARCH TAB ══ -->
   <div id="searchTab">
-
-    <!-- SETUP -->
-    <div class="setup-panel">
-      <div class="setup-row">
-        <div class="setup-group">
-          <label class="api-lbl">🔑 Anthropic API Key</label>
-          <input class="setup-input api" type="password" id="apiKeyInput" placeholder="sk-ant-api03-..." autocomplete="off" spellcheck="false"/>
-        </div>
-        <div class="setup-group">
-          <label class="gs-lbl">📊 Google Script URL</label>
-          <input class="setup-input gs" type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" autocomplete="off" spellcheck="false"/>
-        </div>
-      </div>
-      <button class="save-all-btn" onclick="saveSettings()">💾 Kaydet</button>
-      <div class="saved-msg" id="savedMsg">✅ Ayarlar kaydedildi!</div>
-      <div class="setup-hint">
-        API key → <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a> &nbsp;·&nbsp;
-        Script kurulumu için <strong>kod1_google_apps_script.js</strong> dosyasını Google Apps Script'e yükle, Web App olarak dağıt.
-      </div>
-    </div>
-
-    <!-- SEARCH -->
     <div class="search-panel">
       <div class="search-label">🔍 Pazar Araştırması</div>
       <div class="search-row">
-        <input type="text" id="kwInput" placeholder="wooden tray, wood shelf, personalized cutting board..." autocomplete="off" spellcheck="false"/>
+        <input type="text" id="kwInput" placeholder="wooden tray, wood shelf, cutting board..." autocomplete="off" spellcheck="false"/>
         <button id="searchBtn" onclick="handleSearch()">
           <span class="spinner" id="spinner"></span>
           <span id="btnText">Ara →</span>
@@ -259,30 +180,28 @@ h1 em{font-style:italic;color:var(--wood-light);}
         <button class="sug-btn" onclick="setSug('personalized cutting board')">personalized cutting board</button>
         <button class="sug-btn" onclick="setSug('wooden phone stand')">wooden phone stand</button>
         <button class="sug-btn" onclick="setSug('wood candle holder')">wood candle holder</button>
-        <button class="sug-btn" onclick="setSug('wooden picture frame')">wooden picture frame</button>
-        <button class="sug-btn" onclick="setSug('wood jewelry box')">wood jewelry box</button>
+        <button class="sug-btn" onclick="setSug('wooden jewelry box')">wooden jewelry box</button>
         <button class="sug-btn" onclick="setSug('wooden desk organizer')">wooden desk organizer</button>
+        <button class="sug-btn" onclick="setSug('wood picture frame')">wood picture frame</button>
       </div>
       <div class="error-msg" id="errorMsg"><span>⚠️</span><span id="errorText"></span></div>
     </div>
 
-    <!-- PROGRESS -->
     <div class="progress-wrap" id="progressWrap">
       <div class="progress-label">
-        <span id="progressLabel">Etsy araştırılıyor...</span>
+        <span id="progressLabel">Etsy'den veriler alınıyor...</span>
         <span id="progressPct">0%</span>
       </div>
       <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
     </div>
 
-    <!-- RESULTS HEADER -->
     <div class="results-header" id="resultsHeader">
       <div class="results-title" id="resultsTitle">Sonuçlar</div>
       <div class="sort-row">
         <button class="sort-btn active" id="sort-score" onclick="sortBy('score')">🏆 Fırsat</button>
-        <button class="sort-btn" id="sort-sales" onclick="sortBy('sales')">📦 Satış</button>
-        <button class="sort-btn" id="sort-revenue" onclick="sortBy('revenue')">💰 Gelir</button>
-        <button class="sort-btn" id="sort-comp" onclick="sortBy('competition')">🥊 Rekabet Az</button>
+        <button class="sort-btn" id="sort-price-asc" onclick="sortBy('price-asc')">💲 Ucuzdan</button>
+        <button class="sort-btn" id="sort-price-desc" onclick="sortBy('price-desc')">💰 Pahalıdan</button>
+        <button class="sort-btn" id="sort-favs" onclick="sortBy('favs')">⭐ Favori</button>
       </div>
     </div>
 
@@ -293,10 +212,8 @@ h1 em{font-style:italic;color:var(--wood-light);}
       <p>Henüz arama yapılmadı</p>
       <span>Yukarıya bir anahtar kelime gir ve Etsy'de ne sattığını gör</span>
     </div>
+  </div>
 
-  </div><!-- /searchTab -->
-
-  <!-- ══ FAVORITES TAB ══ -->
   <div id="favsTab">
     <div class="fav-header-row">
       <div class="results-title">❤️ Favori Ürünlerim</div>
@@ -310,183 +227,102 @@ h1 em{font-style:italic;color:var(--wood-light);}
     </div>
   </div>
 
-</div><!-- /page -->
+</div>
 
 <script>
-// ══════════════════════════════════════════════
-// AYARLAR
-// ══════════════════════════════════════════════
-let SCRIPT_URL = '';
-let favUrls = new Set(); // hızlı kontrol için
+const ETSY_KEY = '1buls6myzefxx57xazsuxmlj';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN3lQE_CeuE7aq-oQS3XxVEK_5q4H3uHyG6HobRLPgK6xfcA5J4QXIBlXsRRycixhVwA/exec';
+// Etsy API tarayıcıdan CORS nedeniyle direkt çağrılamıyor, proxy kullanıyoruz
+const PROXY = 'https://api.allorigins.win/get?url=';
 
-function saveSettings(){
-  const apiKey = document.getElementById('apiKeyInput').value.trim();
-  const scriptUrl = document.getElementById('scriptUrlInput').value.trim();
-  if(apiKey) localStorage.setItem('etsy_api_key', apiKey);
-  if(scriptUrl) localStorage.setItem('etsy_script_url', scriptUrl);
-  SCRIPT_URL = scriptUrl || SCRIPT_URL;
-  const msg = document.getElementById('savedMsg');
-  msg.style.display = 'block';
-  setTimeout(()=>msg.style.display='none', 3000);
-}
+let allProducts = [];
+let currentSort = 'score';
+let currentKeyword = '';
+let favIds = new Set();
 
+// ── INIT ──
 window.addEventListener('DOMContentLoaded', async () => {
-  const k = localStorage.getItem('etsy_api_key');
-  if(k) document.getElementById('apiKeyInput').value = k;
-  const DEFAULT_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN3lQE_CeuE7aq-oQS3XxVEK_5q4H3uHyG6HobRLPgK6xfcA5J4QXIBlXsRRycixhVwA/exec';
-  const s = localStorage.getItem('etsy_script_url') || DEFAULT_SCRIPT_URL;
-  document.getElementById('scriptUrlInput').value = s;
-  SCRIPT_URL = s;
+  document.getElementById('kwInput').addEventListener('keydown', e => { if(e.key==='Enter') handleSearch(); });
   await refreshFavCount();
 });
 
-// ══════════════════════════════════════════════
-// TABS
-// ══════════════════════════════════════════════
+// ── TABS ──
 function switchTab(tab){
-  document.getElementById('searchTab').style.display = tab==='search' ? 'block' : 'none';
-  document.getElementById('favsTab').style.display   = tab==='favs'   ? 'block' : 'none';
+  document.getElementById('searchTab').style.display = tab==='search'?'block':'none';
+  document.getElementById('favsTab').style.display   = tab==='favs'?'block':'none';
   document.getElementById('tab-search').classList.toggle('active', tab==='search');
   document.getElementById('tab-favs').classList.toggle('active', tab==='favs');
   if(tab==='favs') loadFavoritesTab();
 }
 
-// ══════════════════════════════════════════════
-// GOOGLE SHEETS — FAVORİLER
-// ══════════════════════════════════════════════
-async function gsGet(params){
-  if(!SCRIPT_URL) throw new Error('Google Script URL girilmedi.');
-  const url = SCRIPT_URL + '?' + new URLSearchParams(params);
-  const res = await fetch(url);
-  return res.json();
-}
-
-async function gsPost(body){
-  if(!SCRIPT_URL) throw new Error('Google Script URL girilmedi.');
-  const res = await fetch(SCRIPT_URL, {
-    method:'POST',
-    body: JSON.stringify(body)
-  });
-  return res.json();
-}
-
-async function refreshFavCount(){
-  if(!SCRIPT_URL){ document.getElementById('favCount').textContent='—'; return; }
-  try {
-    const data = await gsGet({action:'list'});
-    const count = data.favorites ? data.favorites.length : 0;
-    document.getElementById('favCount').textContent = count;
-    favUrls = new Set((data.favorites||[]).map(f=>f.url));
-    // Refresh fav buttons if visible
-    document.querySelectorAll('.fav-btn').forEach(btn=>{
-      const url = btn.dataset.url;
-      btn.classList.toggle('active', favUrls.has(url));
-    });
-  } catch { document.getElementById('favCount').textContent='?'; }
-}
-
-async function toggleFav(url, product){
-  if(!SCRIPT_URL){ showToast('⚠️ Google Script URL ayarlı değil!'); return; }
-  const btn = document.querySelector(`.fav-btn[data-url="${CSS.escape(url)}"]`);
-
-  if(favUrls.has(url)){
-    // Sil
-    if(btn){ btn.style.filter='grayscale(1) opacity(.35)'; btn.classList.remove('active'); }
-    try {
-      await gsGet({action:'remove', url});
-      favUrls.delete(url);
-      showToast('💔 Favoriden çıkarıldı');
-      refreshFavCount();
-    } catch(e){ showToast('⚠️ Hata: '+e.message); }
-  } else {
-    // Ekle
-    if(btn){ btn.classList.add('active'); btn.style.filter=''; }
-    try {
-      const res = await gsPost({action:'add', product});
-      if(res.ok){
-        favUrls.add(url);
-        showToast('❤️ Favoriye eklendi!');
-        refreshFavCount();
-      } else {
-        showToast('⚠️ '+res.error);
-        if(btn){ btn.classList.remove('active'); }
-      }
-    } catch(e){ showToast('⚠️ Hata: '+e.message); }
-  }
-}
-
-async function loadFavoritesTab(){
-  const list = document.getElementById('favList');
-  const empty = document.getElementById('favEmpty');
-  list.innerHTML = '<div class="loading-favs">⏳ Yükleniyor...</div>';
-  empty.style.display = 'none';
-
-  if(!SCRIPT_URL){
-    list.innerHTML='';
-    empty.innerHTML='<span class="fei">⚙️</span><p style="font-family:Fraunces,serif;font-size:16px;">Google Script URL ayarlanmamış</p><span style="font-size:13px;margin-top:6px;display:block;opacity:.7;">Arama sekmesinden Script URL\'yi gir ve kaydet</span>';
-    empty.style.display='block';
-    return;
-  }
-
-  try {
-    const data = await gsGet({action:'list'});
-    const favs = data.favorites || [];
-    document.getElementById('favCount').textContent = favs.length;
-
-    if(!favs.length){
-      list.innerHTML='';
-      empty.style.display='block';
-      return;
-    }
-
-    list.innerHTML = favs.map((p,i) => favCardHTML(p, i+1)).join('');
-  } catch(e){
-    list.innerHTML=`<div style="color:#F87171;padding:20px;font-size:14px;">⚠️ Yüklenemedi: ${e.message}</div>`;
-  }
-}
-
-async function clearAllFavs(){
-  if(!confirm('Tüm favoriler silinsin mi?')) return;
-  try {
-    await gsGet({action:'clear'});
-    favUrls.clear();
-    showToast('🗑️ Tüm favoriler silindi');
-    loadFavoritesTab();
-    refreshFavCount();
-    // search listesindeki butonları güncelle
-    document.querySelectorAll('.fav-btn.active').forEach(b=>{
-      b.classList.remove('active');
-      b.style.filter='grayscale(1) opacity(.35)';
-    });
-  } catch(e){ showToast('⚠️ Hata: '+e.message); }
-}
-
-async function removeFav(url){
-  try {
-    await gsGet({action:'remove', url});
-    favUrls.delete(url);
-    showToast('💔 Favoriden çıkarıldı');
-    loadFavoritesTab();
-    refreshFavCount();
-    // search listesindeki butonu güncelle
-    const btn = document.querySelector(`.fav-btn[data-url="${CSS.escape(url)}"]`);
-    if(btn){ btn.classList.remove('active'); btn.style.filter='grayscale(1) opacity(.35)'; }
-  } catch(e){ showToast('⚠️ Hata: '+e.message); }
-}
-
-// ══════════════════════════════════════════════
-// SEARCH
-// ══════════════════════════════════════════════
-let allProducts = [];
-let currentSort = 'score';
-let currentKeyword = '';
-
 function setSug(val){ document.getElementById('kwInput').value=val; document.getElementById('kwInput').focus(); }
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('kwInput').addEventListener('keydown', e=>{ if(e.key==='Enter') handleSearch(); });
-});
 
-function setProgress(pct,label){
+// ── ETSY API ──
+async function searchEtsyAPI(keyword){
+  const params = new URLSearchParams({
+    keywords: keyword,
+    limit: 25,
+    sort_on: 'score',
+    sort_order: 'desc',
+    includes: 'images,shop',
+  });
+
+  const etsyUrl = `https://openapi.etsy.com/v3/application/listings/active?${params}`;
+  const proxyUrl = PROXY + encodeURIComponent(etsyUrl);
+
+  const res = await fetch(proxyUrl, {
+    headers: { 'x-api-key': ETSY_KEY }
+  });
+
+  if(!res.ok) throw new Error(`Proxy hatası: ${res.status}`);
+
+  const raw = await res.json();
+  const data = raw.contents ? JSON.parse(raw.contents) : raw;
+
+  if(data.error) throw new Error(`Etsy API: ${data.error}`);
+  if(!data.results?.length) throw new Error('Sonuç bulunamadı. Farklı kelime deneyin.');
+
+  return data.results.map((item, i) => {
+    const price = item.price ? parseFloat(item.price.amount) / item.price.divisor : 0;
+    const favCount = item.num_favorers || 0;
+    const salesEst = Math.round(favCount * 2.5);
+    const imageUrl = item.images?.[0]?.url_570xN || null;
+    const shopName = item.shop?.shop_name || `Shop #${item.shop_id}`;
+    const listingAge = item.original_creation_tsz
+      ? Math.max(1, Math.round((Date.now()/1000 - item.original_creation_tsz) / (30*24*3600)))
+      : 18;
+    const monthlySales = salesEst / listingAge;
+    const monthlyRevenue = monthlySales * price;
+
+    // Fırsat skoru: yüksek favori + makul fiyat + genç ilan = iyi fırsat
+    const demandFactor = Math.min(1, favCount / 500) * 40;
+    const priceFactor = Math.min(1, price / 100) * 30;
+    const freshFactor = Math.max(0, 1 - listingAge / 36) * 30;
+    const score = Math.round(demandFactor + priceFactor + freshFactor);
+
+    return {
+      id: String(item.listing_id),
+      title: item.title,
+      shop: shopName,
+      price,
+      currency: item.price?.currency_code || 'USD',
+      favCount,
+      salesCount: salesEst,
+      salesSource: '≈ favori×2.5 tahmini',
+      listingAge,
+      monthlySales,
+      monthlyRevenue,
+      opportunityScore: Math.min(100, score),
+      tags: item.tags || [],
+      imageUrl,
+      url: `https://www.etsy.com/listing/${item.listing_id}`,
+      keyword
+    };
+  });
+}
+
+// ── SEARCH ──
+function setProgress(pct, label){
   document.getElementById('progressFill').style.width=pct+'%';
   document.getElementById('progressPct').textContent=pct+'%';
   document.getElementById('progressLabel').textContent=label;
@@ -494,9 +330,7 @@ function setProgress(pct,label){
 
 async function handleSearch(){
   const kw = document.getElementById('kwInput').value.trim();
-  const apiKey = document.getElementById('apiKeyInput').value.trim();
   document.getElementById('errorMsg').style.display='none';
-  if(!apiKey){ showError('Önce API key girin.'); return; }
   if(!kw){ showError('Arama kelimesi girin.'); return; }
   currentKeyword = kw;
 
@@ -505,13 +339,14 @@ async function handleSearch(){
   document.getElementById('progressWrap').style.display='block';
   document.getElementById('resultsHeader').style.display='none';
   document.getElementById('summaryStrip').style.display='none';
-  setProgress(10,'Etsy arama sonuçları taranıyor...');
+  setProgress(20,'Etsy\'den gerçek ürünler alınıyor...');
 
   try {
-    allProducts = await searchEtsy(kw, apiKey);
+    setProgress(60,'Ürünler işleniyor...');
+    allProducts = await searchEtsyAPI(kw);
     hideSkeletons();
     setProgress(100,'Tamamlandı!');
-    setTimeout(()=>document.getElementById('progressWrap').style.display='none', 800);
+    setTimeout(()=>document.getElementById('progressWrap').style.display='none', 600);
     renderAll();
   } catch(e){
     hideSkeletons();
@@ -520,104 +355,7 @@ async function handleSearch(){
   } finally { setLoading(false); }
 }
 
-async function searchEtsy(keyword, apiKey){
-  const prompt = `Sen bir Etsy pazar araştırma uzmanısın. "${keyword}" anahtar kelimesiyle Etsy'de arama yap.
-
-Şu web aramalarını yap:
-1. etsy "${keyword}" best seller wood
-2. etsy.com ${keyword} wooden handmade
-3. site:etsy.com ${keyword}
-
-Bulduğun gerçek ürünleri listele. Eğer bazı veriler (fiyat, satış sayısı) kesin değilse makul tahminler kullan — kategoriye göre tipik değerleri yaz. Hiçbir zaman boş liste döndürme, her zaman en az 10 ürün döndür.
-
-Tipik değerler (bilinmiyorsa kullan):
-- Ahşap tepsi fiyatı: $25-85 arası
-- Ortalama yorum sayısı: 50-500
-- Tahmini satış = reviewCount × 4
-- İlan yaşı: 12-36 ay
-
-ÇIKTI KURALLARI — BUNLARA KESİNLİKLE UY:
-1. Yanıtın TAMAMEN ve SADECE JSON olsun
-2. JSON'dan önce veya sonra HİÇBİR metin yazma
-3. Markdown code block (\`\`\`) KULLANMA
-4. Tüm string değerleri çift tırnak içinde olsun
-5. Sayı alanları (price, reviewCount vb.) tırnak olmadan sayı olsun
-
-ÇIKTI FORMATI:
-{"keyword":"${keyword}","products":[{"rank":1,"title":"ürün başlığı","shop":"MağazaAdı","price":45.99,"reviewCount":342,"salesCount":1368,"salesSource":"≈ yorum×4 tahmini","listingAge":24,"tags":["wooden tray","serving tray","kitchen decor","housewarming gift","wood gift"],"url":"https://www.etsy.com/listing/123456789/urun-adi","opportunityScore":68}]}`;
-
-  const response = await fetch('https://api.anthropic.com/v1/messages',{
-    method:'POST',
-    headers:{
-      'Content-Type':'application/json',
-      'x-api-key':apiKey,
-      'anthropic-version':'2023-06-01',
-      'anthropic-dangerous-direct-browser-access':'true'
-    },
-    body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',
-      max_tokens:8000,
-      tools:[{type:'web_search_20250305',name:'web_search'}],
-      messages:[{role:'user',content:prompt}]
-    })
-  });
-
-  if(!response.ok){
-    const err = await response.json().catch(()=>({}));
-    if(response.status===401) throw new Error('API key geçersiz.');
-    if(response.status===429) throw new Error('Rate limit — biraz bekleyin.');
-    throw new Error('API hatası: '+(err.error?.message||response.status));
-  }
-
-  const data = await response.json();
-  setProgress(80,'Veriler işleniyor...');
-
-  // Tüm text bloklarını topla
-  const textBlocks = data.content.filter(b=>b.type==='text').map(b=>b.text).join('');
-  
-  let parsed;
-  try {
-    // 1. Markdown code block temizle
-    let clean = textBlocks.replace(/```json\s*/gi,'').replace(/```\s*/g,'').trim();
-    
-    // 2. JSON bloğunu bul - en dıştaki { } 
-    const start = clean.indexOf('{');
-    const end = clean.lastIndexOf('}');
-    if(start === -1 || end === -1) throw new Error('JSON bulunamadı');
-    clean = clean.substring(start, end + 1);
-    
-    // 3. Parse et
-    parsed = JSON.parse(clean);
-  } catch(e) {
-    // 4. Parse başarısız — Claude'a düzeltmesini iste
-    console.error('Parse hatası:', e, '\nRaw:', textBlocks.substring(0,500));
-    throw new Error('Veri formatı hatalı geldi. Tekrar deneyin — genellikle ikinci denemede çalışıyor.');
-  }
-
-  if(!parsed.products?.length) throw new Error('Sonuç alınamadı. Lütfen tekrar deneyin — bazen ilk aramada olmuyor.');
-
-  return parsed.products.map(p=>{
-    const sales = parseInt(p.salesCount)||0;
-    const reviews = parseInt(p.reviewCount)||0;
-    const age = Math.max(1,parseInt(p.listingAge)||12);
-    const price = parseFloat(p.price)||0;
-    const monthlySales = sales/age;
-    const monthlyRevenue = monthlySales*price;
-    let score = parseInt(p.opportunityScore)||0;
-    if(!score && sales>0){
-      score = Math.round(
-        Math.min(1,sales/2000)*40 +
-        Math.min(1,price/60)*30 +
-        (1-Math.min(1,reviews/800))*30
-      );
-    }
-    return {...p, salesCount:sales, reviewCount:reviews, listingAge:age, price, monthlySales, monthlyRevenue, opportunityScore:Math.min(100,score), tags:p.tags||[], keyword:currentKeyword};
-  });
-}
-
-// ══════════════════════════════════════════════
-// RENDER
-// ══════════════════════════════════════════════
+// ── RENDER ──
 function sortBy(key){
   currentSort=key;
   document.querySelectorAll('.sort-btn').forEach(b=>b.classList.remove('active'));
@@ -627,9 +365,9 @@ function sortBy(key){
 
 function getSorted(){
   const arr=[...allProducts];
-  if(currentSort==='sales') arr.sort((a,b)=>b.salesCount-a.salesCount);
-  else if(currentSort==='revenue') arr.sort((a,b)=>b.monthlyRevenue-a.monthlyRevenue);
-  else if(currentSort==='competition') arr.sort((a,b)=>a.reviewCount-b.reviewCount);
+  if(currentSort==='price-asc') arr.sort((a,b)=>a.price-b.price);
+  else if(currentSort==='price-desc') arr.sort((a,b)=>b.price-a.price);
+  else if(currentSort==='favs') arr.sort((a,b)=>b.favCount-a.favCount);
   else arr.sort((a,b)=>b.opportunityScore-a.opportunityScore);
   return arr;
 }
@@ -638,24 +376,25 @@ function renderAll(){
   const sorted=getSorted();
   const list=document.getElementById('productList');
   const empty=document.getElementById('emptyState');
-  if(!sorted.length){ list.innerHTML=''; empty.style.display='block'; document.getElementById('resultsHeader').style.display='none'; document.getElementById('summaryStrip').style.display='none'; return; }
-
+  if(!sorted.length){ list.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
   document.getElementById('resultsHeader').style.display='flex';
 
-  const totalSales=sorted.reduce((s,p)=>s+p.salesCount,0);
-  const avgMonthly=sorted.reduce((s,p)=>s+p.monthlySales,0)/sorted.length;
   const avgPrice=sorted.reduce((s,p)=>s+p.price,0)/sorted.length;
+  const minPrice=Math.min(...sorted.map(p=>p.price));
+  const maxPrice=Math.max(...sorted.map(p=>p.price));
+  const totalFavs=sorted.reduce((s,p)=>s+p.favCount,0);
 
   const strip=document.getElementById('summaryStrip');
   strip.style.display='flex';
   strip.innerHTML=
-    stripCard('Toplam Tahmini Satış',fmtNum(totalSales),'#C17F3B',sorted.length+' ürün')+
-    stripCard('Ort. Aylık Satış',avgMonthly.toFixed(1),'#4CAF7D','ürün başına')+
+    stripCard('Fiyat Aralığı','$'+minPrice.toFixed(0)+' – $'+maxPrice.toFixed(0),'#C17F3B',sorted.length+' ürün')+
     stripCard('Ort. Fiyat','$'+avgPrice.toFixed(2),'#F0C040','USD')+
-    stripCard('En İyi Fırsat',sorted[0].opportunityScore+'/100','#A78BFA','fırsat skoru');
+    stripCard('Top. Favori',fmtNum(totalFavs),'#4CAF7D','tüm ürünler')+
+    stripCard('En İyi Fırsat',sorted.reduce((a,b)=>b.opportunityScore>a.opportunityScore?b:a).opportunityScore+'/100','#A78BFA','skor');
 
   list.innerHTML=sorted.map((p,i)=>productCardHTML(p,i+1)).join('');
+  document.getElementById('resultsTitle').innerHTML=`<span>"${currentKeyword}"</span> için ${sorted.length} ürün`;
 }
 
 function stripCard(label,val,color,sub){
@@ -666,104 +405,183 @@ function productCardHTML(p, rank){
   const score=p.opportunityScore||0;
   const sc=score>=65?'high':score>=40?'mid':'low';
   const sl=score>=65?'🟢 Yüksek Fırsat':score>=40?'🟡 Orta Fırsat':'🔴 Rekabetçi';
-  const isFaved = favUrls.has(p.url);
+  const isFaved=favIds.has(p.id);
   const monthly=p.monthlySales>0?p.monthlySales.toFixed(1):'—';
   const revenue=p.monthlyRevenue>0?'$'+p.monthlyRevenue.toFixed(0):'—';
-  const tagsHtml=p.tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${p.tags.slice(0,8).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:'';
-  const escapedTitle = encodeURIComponent(p.title);
-  const etsySearchUrl = `https://www.etsy.com/search?q=${escapedTitle}`;
-  const productJson = encodeURIComponent(JSON.stringify({...p, url: p.title}));
+  const imgHtml=p.imageUrl
+    ? `<img class="prod-img" src="${p.imageUrl}" alt="" loading="lazy" onerror="this.outerHTML='<div class=prod-img-placeholder>🪵</div>'">`
+    : `<div class="prod-img-placeholder">🪵</div>`;
+  const tagsHtml=p.tags.length
+    ? `<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${p.tags.slice(0,12).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`
+    : '';
+  const safeId=p.id.replace(/'/g,'');
+  const safeP=encodeURIComponent(JSON.stringify(p));
 
   return `<div class="product-card score-${sc}">
     <div class="prod-rank ${rank<=3?'top3':''}">${rank}</div>
+    ${imgHtml}
     <div class="prod-body">
       <div class="prod-head">
-        <div class="prod-title">${p.title}</div>
+        <a class="prod-title" href="${p.url}" target="_blank" rel="noreferrer">${p.title}</a>
         <div class="prod-actions">
           <span class="score-badge ${sc}">${sl}</span>
-          <button class="fav-btn ${isFaved?'active':''}" data-url="${escapedTitle}"
-            style="${isFaved?'':'filter:grayscale(1) opacity(.35);'}"
+          <button class="fav-btn ${isFaved?'active':''}" style="${isFaved?'':'filter:grayscale(1) opacity(.35);'}"
             title="${isFaved?'Favoriden çıkar':'Favoriye ekle'}"
-            onclick="toggleFav('${escapedTitle}', JSON.parse(decodeURIComponent('${productJson}')))">❤️</button>
+            onclick="toggleFav('${safeId}','${safeP}')">❤️</button>
         </div>
       </div>
-      <div class="prod-shop">🏪 ${p.shop||'Bilinmeyen'} &nbsp;·&nbsp; ${p.listingAge} aylık ilan &nbsp;·&nbsp; ${p.salesSource||'tahmin'}</div>
+      <div class="prod-shop">🏪 ${p.shop} &nbsp;·&nbsp; ${p.listingAge} aylık &nbsp;·&nbsp; ${p.salesSource}</div>
       <div class="prod-stats">
-        <div class="pstat"><div class="pstat-label">Fiyat</div><div class="pstat-val" style="color:#C17F3B;">$${p.price.toFixed(2)}</div><div class="pstat-sub">USD</div></div>
-        <div class="pstat"><div class="pstat-label">Tahmini Satış</div><div class="pstat-val" style="color:#4CAF7D;">${fmtNum(p.salesCount)}</div><div class="pstat-sub">toplam</div></div>
-        <div class="pstat"><div class="pstat-label">Aylık Satış</div><div class="pstat-val" style="color:#A78BFA;">${monthly}</div><div class="pstat-sub">ort.</div></div>
-        <div class="pstat"><div class="pstat-label">Aylık Gelir</div><div class="pstat-val" style="color:#F0C040;">${revenue}</div><div class="pstat-sub">tahmini</div></div>
-        <div class="pstat"><div class="pstat-label">Yorum</div><div class="pstat-val" style="color:#F87171;">${fmtNum(p.reviewCount)}</div><div class="pstat-sub">adet</div></div>
+        <div class="pstat"><div class="pstat-label">Fiyat</div><div class="pstat-val" style="color:#C17F3B;">$${p.price.toFixed(2)}</div><div class="pstat-sub">${p.currency}</div></div>
+        <div class="pstat"><div class="pstat-label">Favori</div><div class="pstat-val" style="color:#4CAF7D;">${fmtNum(p.favCount)}</div><div class="pstat-sub">adet</div></div>
+        <div class="pstat"><div class="pstat-label">Tahmini Satış</div><div class="pstat-val" style="color:#A78BFA;">${fmtNum(p.salesCount)}</div><div class="pstat-sub">toplam</div></div>
+        <div class="pstat"><div class="pstat-label">Aylık Ort.</div><div class="pstat-val" style="color:#F0C040;">${monthly}</div><div class="pstat-sub">satış</div></div>
         <div class="pstat"><div class="pstat-label">Fırsat</div><div class="pstat-val" style="color:${score>=65?'#4CAF7D':score>=40?'#F0C040':'#E05555'};">${score}</div><div class="pstat-sub">/ 100</div></div>
       </div>
       ${tagsHtml}
-      <a href="${etsySearchUrl}" target="_blank" rel="noreferrer" class="etsy-search-btn">
-        🔍 Etsy'de Bu Ürünü Ara →
-      </a>
+      <a href="${p.url}" target="_blank" rel="noreferrer" class="etsy-link-btn">🛍️ Etsy'de Ürünü Gör →</a>
     </div>
   </div>`;
+}
+
+// ── FAVORİLER ──
+async function gsGet(params){
+  const url=SCRIPT_URL+'?'+new URLSearchParams(params);
+  const res=await fetch(url);
+  return res.json();
+}
+async function gsPost(body){
+  const res=await fetch(SCRIPT_URL,{method:'POST',body:JSON.stringify(body)});
+  return res.json();
+}
+
+async function refreshFavCount(){
+  try {
+    const data=await gsGet({action:'list'});
+    const favs=data.favorites||[];
+    document.getElementById('favCount').textContent=favs.length;
+    favIds=new Set(favs.map(f=>f.url));
+  } catch { document.getElementById('favCount').textContent='?'; }
+}
+
+async function toggleFav(id, safeP){
+  let p;
+  try { p=JSON.parse(decodeURIComponent(safeP)); } catch { return; }
+
+  const btns=document.querySelectorAll(`.fav-btn`);
+  const myBtn=[...btns].find(b=>b.getAttribute('onclick')?.includes(`'${id}'`));
+
+  if(favIds.has(id)){
+    if(myBtn){myBtn.classList.remove('active');myBtn.style.filter='grayscale(1) opacity(.35)';}
+    try {
+      await gsGet({action:'remove',url:id});
+      favIds.delete(id);
+      showToast('💔 Favoriden çıkarıldı');
+      document.getElementById('favCount').textContent=favIds.size;
+    } catch(e){ showToast('⚠️ '+e.message); }
+  } else {
+    if(myBtn){myBtn.classList.add('active');myBtn.style.filter='';}
+    try {
+      const res=await gsPost({action:'add',product:{
+        title:p.title, shop:p.shop, price:p.price,
+        salesCount:p.salesCount, monthlySales:p.monthlySales,
+        monthlyRevenue:p.monthlyRevenue, reviewCount:p.favCount,
+        opportunityScore:p.opportunityScore, tags:p.tags,
+        keyword:p.keyword, url:id, imageUrl:p.imageUrl, etsyUrl:p.url
+      }});
+      if(res.ok){
+        favIds.add(id);
+        showToast('❤️ Favoriye eklendi!');
+        document.getElementById('favCount').textContent=favIds.size;
+      } else {
+        if(myBtn){myBtn.classList.remove('active');myBtn.style.filter='grayscale(1) opacity(.35)';}
+        showToast('⚠️ '+res.error);
+      }
+    } catch(e){ showToast('⚠️ '+e.message); }
+  }
+}
+
+async function loadFavoritesTab(){
+  const list=document.getElementById('favList');
+  const empty=document.getElementById('favEmpty');
+  list.innerHTML='<div style="text-align:center;padding:40px;color:var(--muted);font-size:14px;">⏳ Yükleniyor...</div>';
+  empty.style.display='none';
+  try {
+    const data=await gsGet({action:'list'});
+    const favs=data.favorites||[];
+    document.getElementById('favCount').textContent=favs.length;
+    favIds=new Set(favs.map(f=>f.url));
+    if(!favs.length){list.innerHTML='';empty.style.display='block';return;}
+    list.innerHTML=favs.map((p,i)=>favCardHTML(p,i+1)).join('');
+  } catch(e){
+    list.innerHTML=`<div style="color:#F87171;padding:20px;font-size:14px;">⚠️ ${e.message}</div>`;
+  }
+}
+
+async function clearAllFavs(){
+  if(!confirm('Tüm favoriler silinsin mi?')) return;
+  try {
+    await gsGet({action:'clear'});
+    favIds.clear();
+    showToast('🗑️ Tüm favoriler silindi');
+    loadFavoritesTab();
+    document.getElementById('favCount').textContent='0';
+  } catch(e){ showToast('⚠️ '+e.message); }
+}
+
+async function removeFav(id){
+  try {
+    await gsGet({action:'remove',url:id});
+    favIds.delete(id);
+    showToast('💔 Favoriden çıkarıldı');
+    loadFavoritesTab();
+    document.getElementById('favCount').textContent=favIds.size;
+  } catch(e){ showToast('⚠️ '+e.message); }
 }
 
 function favCardHTML(p, rank){
   const score=p.opportunityScore||0;
   const sc=score>=65?'high':score>=40?'mid':'low';
-  const monthly = p.monthlySales ? parseFloat(p.monthlySales).toFixed(1) : '—';
-  const revenue = p.monthlyRevenue ? '$'+parseFloat(p.monthlyRevenue).toFixed(0) : '—';
-  const tags = Array.isArray(p.tags) ? p.tags : (p.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
-  const etsySearchUrl = `https://www.etsy.com/search?q=${encodeURIComponent(p.title||'')}`;
-  const escapedTitle = (p.title||'').replace(/'/g,"\\'");
+  const monthly=p.monthlySales?parseFloat(p.monthlySales).toFixed(1):'—';
+  const revenue=p.monthlyRevenue?'$'+parseFloat(p.monthlyRevenue).toFixed(0):'—';
+  const tags=Array.isArray(p.tags)?p.tags:(p.tags||'').split(',').map(t=>t.trim()).filter(Boolean);
+  const etsyUrl=p.etsyUrl||`https://www.etsy.com/listing/${p.url}`;
+  const imgHtml=p.imageUrl
+    ?`<img class="prod-img" src="${p.imageUrl}" alt="" loading="lazy" onerror="this.outerHTML='<div class=prod-img-placeholder>🪵</div>'">`
+    :`<div class="prod-img-placeholder">🪵</div>`;
 
   return `<div class="product-card score-${sc}">
     <div class="prod-rank ${rank<=3?'top3':''}">${rank}</div>
+    ${imgHtml}
     <div class="prod-body">
       <div class="prod-head">
-        <div class="prod-title">${p.title}</div>
+        <a class="prod-title" href="${etsyUrl}" target="_blank" rel="noreferrer">${p.title}</a>
         <div class="prod-actions">
           <span class="score-badge ${sc}">${score}/100</span>
-          <button class="fav-btn active" title="Favoriden çıkar" onclick="removeFav('${escapedTitle}')">❤️</button>
+          <button class="fav-btn active" title="Favoriden çıkar" onclick="removeFav('${p.url}')">❤️</button>
         </div>
       </div>
-      <div class="prod-shop">🏪 ${p.shop||'Bilinmeyen'} &nbsp;·&nbsp; 🔍 ${p.keyword||'—'} &nbsp;·&nbsp; 📅 ${p.addedAt||''}</div>
+      <div class="prod-shop">🏪 ${p.shop||'—'} &nbsp;·&nbsp; 🔍 ${p.keyword||'—'} &nbsp;·&nbsp; 📅 ${p.addedAt||''}</div>
       <div class="prod-stats">
         <div class="pstat"><div class="pstat-label">Fiyat</div><div class="pstat-val" style="color:#C17F3B;">$${parseFloat(p.price||0).toFixed(2)}</div><div class="pstat-sub">USD</div></div>
-        <div class="pstat"><div class="pstat-label">Tahmini Satış</div><div class="pstat-val" style="color:#4CAF7D;">${fmtNum(p.salesCount)}</div><div class="pstat-sub">toplam</div></div>
-        <div class="pstat"><div class="pstat-label">Aylık Satış</div><div class="pstat-val" style="color:#A78BFA;">${monthly}</div><div class="pstat-sub">ort.</div></div>
-        <div class="pstat"><div class="pstat-label">Aylık Gelir</div><div class="pstat-val" style="color:#F0C040;">${revenue}</div><div class="pstat-sub">tahmini</div></div>
-        <div class="pstat"><div class="pstat-label">Yorum</div><div class="pstat-val" style="color:#F87171;">${fmtNum(p.reviewCount)}</div><div class="pstat-sub">adet</div></div>
+        <div class="pstat"><div class="pstat-label">Favori</div><div class="pstat-val" style="color:#4CAF7D;">${fmtNum(p.reviewCount)}</div><div class="pstat-sub">adet</div></div>
+        <div class="pstat"><div class="pstat-label">Tahmini Satış</div><div class="pstat-val" style="color:#A78BFA;">${fmtNum(p.salesCount)}</div><div class="pstat-sub">toplam</div></div>
+        <div class="pstat"><div class="pstat-label">Aylık Ort.</div><div class="pstat-val" style="color:#F0C040;">${monthly}</div><div class="pstat-sub">satış</div></div>
         <div class="pstat"><div class="pstat-label">Fırsat</div><div class="pstat-val" style="color:${score>=65?'#4CAF7D':score>=40?'#F0C040':'#E05555'};">${score}</div><div class="pstat-sub">/ 100</div></div>
       </div>
-      ${tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${tags.slice(0,8).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:''}
-      <a href="${etsySearchUrl}" target="_blank" rel="noreferrer" class="etsy-search-btn">
-        🔍 Etsy'de Bu Ürünü Ara →
-      </a>
+      ${tags.length?`<div class="tags-section"><div class="tags-label">🏷️ Tag'ler</div><div class="tags-list">${tags.slice(0,12).map(t=>`<span class="tag">${t}</span>`).join('')}</div></div>`:''}
+      <a href="${etsyUrl}" target="_blank" rel="noreferrer" class="etsy-link-btn">🛍️ Etsy'de Ürünü Gör →</a>
     </div>
   </div>`;
 }
 
-// ══════════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════════
+// ── HELPERS ──
 function fmtNum(n){ if(!n) return '—'; return Number(n).toLocaleString('tr-TR'); }
-
-function showError(msg){
-  const el=document.getElementById('errorMsg');
-  document.getElementById('errorText').textContent=msg;
-  el.style.display='flex';
-}
-
-function setLoading(on){
-  document.getElementById('searchBtn').disabled=on;
-  document.getElementById('spinner').style.display=on?'flex':'none';
-  document.getElementById('btnText').textContent=on?'Aranıyor...':'Ara →';
-}
+function showError(msg){ const el=document.getElementById('errorMsg'); document.getElementById('errorText').textContent=msg; el.style.display='flex'; }
+function setLoading(on){ document.getElementById('searchBtn').disabled=on; document.getElementById('spinner').style.display=on?'flex':'none'; document.getElementById('btnText').textContent=on?'Aranıyor...':'Ara →'; }
 
 let toastTimer;
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer=setTimeout(()=>t.classList.remove('show'), 2800);
-}
+function showToast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),2800); }
 
 let skelEls=[];
 function showSkeletons(n){
@@ -773,7 +591,7 @@ function showSkeletons(n){
   for(let i=0;i<n;i++){
     const el=document.createElement('div');
     el.className='skeleton-card';
-    el.innerHTML=`<div class="skel" style="width:36px;height:36px;border-radius:10px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:10px;"><div class="skel" style="height:16px;width:70%;"></div><div class="skel" style="height:13px;width:35%;"></div><div style="display:flex;gap:8px;">${[1,2,3,4,5,6].map(()=>`<div class="skel" style="height:58px;flex:1;border-radius:12px;"></div>`).join('')}</div></div>`;
+    el.innerHTML=`<div class="skel" style="width:36px;height:36px;border-radius:10px;flex-shrink:0;"></div><div class="skel" style="width:80px;height:80px;border-radius:12px;flex-shrink:0;"></div><div style="flex:1;display:flex;flex-direction:column;gap:10px;"><div class="skel" style="height:16px;width:70%;"></div><div class="skel" style="height:13px;width:35%;"></div><div style="display:flex;gap:8px;">${[1,2,3,4,5].map(()=>`<div class="skel" style="height:58px;flex:1;border-radius:12px;"></div>`).join('')}</div></div>`;
     list.appendChild(el);
     skelEls.push(el);
   }
