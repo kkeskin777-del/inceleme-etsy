@@ -232,8 +232,11 @@ h1 em{font-style:italic;color:var(--wood-light);}
 <script>
 const ETSY_KEY = '1buls6myzefxx57xazsuxmlj';
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN3lQE_CeuE7aq-oQS3XxVEK_5q4H3uHyG6HobRLPgK6xfcA5J4QXIBlXsRRycixhVwA/exec';
-// Etsy API tarayıcıdan CORS nedeniyle direkt çağrılamıyor, proxy kullanıyoruz
-const PROXY = 'https://api.allorigins.win/get?url=';
+// CORS proxy listesi — header'ları Etsy'ye ileten proxy'ler
+const PROXIES = [
+  { name: 'corsproxy', build: (url) => 'https://corsproxy.io/?' + encodeURIComponent(url) },
+  { name: 'corsanywhere', build: (url) => 'https://cors-anywhere.herokuapp.com/' + url },
+];
 
 let allProducts = [];
 let currentSort = 'score';
@@ -258,36 +261,53 @@ function switchTab(tab){
 function setSug(val){ document.getElementById('kwInput').value=val; document.getElementById('kwInput').focus(); }
 
 // ── ETSY API ──
+async function fetchViaProxy(etsyUrl) {
+  let lastError = null;
+  for (const proxy of PROXIES) {
+    try {
+      const proxyUrl = proxy.build(etsyUrl);
+      const res = await fetch(proxyUrl, {
+        headers: { 'x-api-key': ETSY_KEY }
+      });
+      if (!res.ok) { lastError = new Error(`${proxy.name}: HTTP ${res.status}`); continue; }
+      const text = await res.text();
+      let data;
+      try {
+        data = JSON.parse(text);
+        // Bazı proxy'ler {contents:"..."} formatında döner
+        if (typeof data.contents === 'string') data = JSON.parse(data.contents);
+      } catch { lastError = new Error(`${proxy.name}: JSON parse hatası`); continue; }
+      if (data.error) { lastError = new Error(`Etsy API: ${data.error}`); continue; }
+      return data;
+    } catch (e) { lastError = e; }
+  }
+  throw lastError || new Error('Tüm proxy\'ler başarısız oldu. Lütfen birkaç dakika sonra tekrar deneyin.');
+}
+
 async function searchEtsyAPI(keyword){
   const params = new URLSearchParams({
     keywords: keyword,
     limit: 25,
     sort_on: 'score',
     sort_order: 'desc',
-    includes: 'images,shop',
+    includes: 'Images,Shop',
   });
 
+  // API key header üzerinden gönderilir (corsproxy.io iletir)
   const etsyUrl = `https://openapi.etsy.com/v3/application/listings/active?${params}`;
-  const proxyUrl = PROXY + encodeURIComponent(etsyUrl);
+  const data = await fetchViaProxy(etsyUrl);
 
-  const res = await fetch(proxyUrl, {
-    headers: { 'x-api-key': ETSY_KEY }
-  });
-
-  if(!res.ok) throw new Error(`Proxy hatası: ${res.status}`);
-
-  const raw = await res.json();
-  const data = raw.contents ? JSON.parse(raw.contents) : raw;
-
-  if(data.error) throw new Error(`Etsy API: ${data.error}`);
   if(!data.results?.length) throw new Error('Sonuç bulunamadı. Farklı kelime deneyin.');
 
   return data.results.map((item, i) => {
     const price = item.price ? parseFloat(item.price.amount) / item.price.divisor : 0;
     const favCount = item.num_favorers || 0;
     const salesEst = Math.round(favCount * 2.5);
-    const imageUrl = item.images?.[0]?.url_570xN || null;
-    const shopName = item.shop?.shop_name || `Shop #${item.shop_id}`;
+    // Etsy v3 includes: Images büyük harfle de gelebilir
+    const images = item.images || item.Images || [];
+    const imageUrl = images[0]?.url_570xN || null;
+    const shop = item.shop || item.Shop || {};
+    const shopName = shop.shop_name || `Shop #${item.shop_id}`;
     const listingAge = item.original_creation_tsz
       ? Math.max(1, Math.round((Date.now()/1000 - item.original_creation_tsz) / (30*24*3600)))
       : 18;
@@ -351,7 +371,14 @@ async function handleSearch(){
   } catch(e){
     hideSkeletons();
     document.getElementById('progressWrap').style.display='none';
-    showError(e.message);
+    const msg = e.message || 'Bilinmeyen hata';
+    if(msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('proxy')) {
+      showError('Bağlantı hatası — CORS proxy\'ye erişilemiyor. İnternet bağlantınızı kontrol edin veya birkaç saniye sonra tekrar deneyin.');
+    } else if(msg.includes('API')) {
+      showError('Etsy API hatası: ' + msg + ' — API anahtarını kontrol edin.');
+    } else {
+      showError(msg);
+    }
   } finally { setLoading(false); }
 }
 
