@@ -230,13 +230,8 @@ h1 em{font-style:italic;color:var(--wood-light);}
 </div>
 
 <script>
-const ETSY_KEY = '1buls6myzefxx57xazsuxmlj';
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyN3lQE_CeuE7aq-oQS3XxVEK_5q4H3uHyG6HobRLPgK6xfcA5J4QXIBlXsRRycixhVwA/exec';
-// CORS proxy listesi — header'ları Etsy'ye ileten proxy'ler
-const PROXIES = [
-  { name: 'corsproxy', build: (url) => 'https://corsproxy.io/?' + encodeURIComponent(url) },
-  { name: 'corsanywhere', build: (url) => 'https://cors-anywhere.herokuapp.com/' + url },
-];
+// CORS proxy'ye gerek yok — Etsy API çağrıları Google Apps Script üzerinden yapılır
 
 let allProducts = [];
 let currentSort = 'score';
@@ -260,44 +255,14 @@ function switchTab(tab){
 
 function setSug(val){ document.getElementById('kwInput').value=val; document.getElementById('kwInput').focus(); }
 
-// ── ETSY API ──
-async function fetchViaProxy(etsyUrl) {
-  let lastError = null;
-  for (const proxy of PROXIES) {
-    try {
-      const proxyUrl = proxy.build(etsyUrl);
-      const res = await fetch(proxyUrl, {
-        headers: { 'x-api-key': ETSY_KEY }
-      });
-      if (!res.ok) { lastError = new Error(`${proxy.name}: HTTP ${res.status}`); continue; }
-      const text = await res.text();
-      let data;
-      try {
-        data = JSON.parse(text);
-        // Bazı proxy'ler {contents:"..."} formatında döner
-        if (typeof data.contents === 'string') data = JSON.parse(data.contents);
-      } catch { lastError = new Error(`${proxy.name}: JSON parse hatası`); continue; }
-      if (data.error) { lastError = new Error(`Etsy API: ${data.error}`); continue; }
-      return data;
-    } catch (e) { lastError = e; }
-  }
-  throw lastError || new Error('Tüm proxy\'ler başarısız oldu. Lütfen birkaç dakika sonra tekrar deneyin.');
-}
-
+// ── ETSY API (Google Apps Script üzerinden) ──
 async function searchEtsyAPI(keyword){
-  const params = new URLSearchParams({
-    keywords: keyword,
-    limit: 25,
-    sort_on: 'score',
-    sort_order: 'desc',
-    includes: 'Images,Shop',
-  });
-
-  // API key header üzerinden gönderilir (corsproxy.io iletir)
-  const etsyUrl = `https://openapi.etsy.com/v3/application/listings/active?${params}`;
-  const data = await fetchViaProxy(etsyUrl);
-
-  if(!data.results?.length) throw new Error('Sonuç bulunamadı. Farklı kelime deneyin.');
+  const url = SCRIPT_URL + '?' + new URLSearchParams({ action: 'etsySearch', keywords: keyword });
+  const res = await fetch(url);
+  if(!res.ok) throw new Error(`Sunucu hatası: HTTP ${res.status}`);
+  const data = await res.json();
+  if(data.error) throw new Error(`Etsy API: ${data.error}`);
+  if(!data.results?.length) throw new Error('Sonuç bulunamadı. Farklı bir kelime deneyin.');
 
   return data.results.map((item, i) => {
     const price = item.price ? parseFloat(item.price.amount) / item.price.divisor : 0;
@@ -372,10 +337,10 @@ async function handleSearch(){
     hideSkeletons();
     document.getElementById('progressWrap').style.display='none';
     const msg = e.message || 'Bilinmeyen hata';
-    if(msg.includes('Failed to fetch') || msg.includes('NetworkError') || msg.includes('proxy')) {
-      showError('Bağlantı hatası — CORS proxy\'ye erişilemiyor. İnternet bağlantınızı kontrol edin veya birkaç saniye sonra tekrar deneyin.');
-    } else if(msg.includes('API')) {
-      showError('Etsy API hatası: ' + msg + ' — API anahtarını kontrol edin.');
+    if(msg.includes('Failed to fetch') || msg.includes('NetworkError')) {
+      showError('Bağlantı hatası — Google Apps Script\'e erişilemiyor. İnternet bağlantınızı kontrol edin.');
+    } else if(msg.includes('Etsy API')) {
+      showError(msg + ' — Apps Script\'teki etsySearch fonksiyonunu kontrol edin.');
     } else {
       showError(msg);
     }
